@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <div id='app'>
+        <img v-bind:src='imgUrl'></img>
+        <a :href="vueUrl">vue.js</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello world',
+                imgUrl: './image/vue.png',
+                vueUrl: 'https://vuejs.org/',
+            },
+        });
+    </script>
+</body>
+
+</html>
