@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+        .div1 {
+            background-color: #248;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div ></div>
+    <div id="app">Counting: {{cnt}}
+        <button v-on:click='inc'>+</button>
+
+        <!-- v-on: 可以用简写为@ -->
+        <button @click='dec'>-</button>
+
+        <!-- 接收event(注意参数名$event不能随意改) -->
+        <button @click='onClick1(123, $event)'>Button1</button>
+
+        <!-- 修饰符.stop防止冒泡 -->
+        <div class='div1' @click='onClickDev1'>
+            <!-- 此处的.stop, 防止点击事件冒泡到div1 -->
+            <button @click.stop='onClick2'>Button2</button>
+        </div>
+
+        <!-- 修饰符.prevent防止冒泡 -->
+        <form action='baidu'>
+            <input type='submit' value='提交' @click.prevent='submitClick'>
+        </form>
+
+        <!-- 监听键盘事件. 除了一些有特殊名称的键外, 其他的可以用打印出的event中的keyCode来监听,
+             如191为'/', 但是如果用@keyup.slash则监听不到 -->
+        <input type='text' @keyup.enter='onPressEnter' @keyup.a='onPressA' @keyup.191='onPressSearch' @keyup='onPressAny'>
+
+        <!-- .native可以用于监听组件的根元素的原生事件 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                cnt: 0,
+            },
+            methods: {
+                inc() {
+                    this.cnt++;
+                    console.log('inc', this.cnt);
+                },
+                dec() {
+                    this.cnt--;
+                    console.log('dec', this.cnt);
+                },
+                onClick1(a, e) {
+                    console.log('onClick1', a, e);
+                },
+                onClick2(e) {
+                    console.log('onClick button 2', e);
+                },
+                onClickDev1(e) {
+                    console.log('onClickDev1', e);
+                },
+                submitClick(e) {
+                    console.log('submitClick', e);
+                },
+
+                onPressEnter(e) {
+                    console.log('onPressEnter', e);
+                },
+                onPressA(e) {
+                    console.log('onPressA', e);
+                },
+                onPressAny(e) {
+                    //console.log('onPressAny', e);
+                },
+                onPressSearch(e) {
+                    console.log('onPressSearch', e);
+                },
+                
+            },
+        });
+    </script>
+</body>
+
+</html>
